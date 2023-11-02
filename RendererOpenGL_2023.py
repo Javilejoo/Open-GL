@@ -33,7 +33,7 @@ triangleModel.scale = glm.vec3(5,5,5)
 rend.scene.append(triangleModel) """
 
 obj = Obj("models/GoingMerry.obj", "textures/Onepiece.bmp")
-obj.model.position = glm.vec3(0.0, -0.5, -1.0)
+obj.model.position = glm.vec3(-3.0,0.0,0.0)
 rend.scene.append(obj.model)
 
 
@@ -49,6 +49,7 @@ while isRunning:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 isRunning = False
+        
 
         if keys[K_RIGHT]:
             if rend.clearColor[0] < 1.0:
@@ -95,9 +96,8 @@ while isRunning:
     rend.elapsedTime += deltaTime
     
     
-    
+
 
     rend.render()
     pygame.display.flip()
-
 pygame.quit()
