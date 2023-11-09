@@ -17,20 +17,6 @@ clock = pygame.time.Clock()
 rend = Renderer(screen)
 
 rend.setShaders(vertex_shader, unlit_shader)
-""" #               POSITIONS              UVs          NORMALS
-triangleData = [-0.5,-0.5, 0.0,        0.0, 0.0,    0.0, 0.0, 1.0,
-                 -0.5, 0.5, 0.0,       0.0, 1.0,    0.0, 0.0, 1.0,
-                 0.5, -0.5, 0.0,       1.0, 0.0,    0.0, 0.0, 1.0,
-                 
-                 -0.5,0.5, 0.0,        0.0, 1.0,    0.0, 0.0, 1.0,
-                 0.5, 0.5, 0.0,        1.0, 1.0,    0.0, 0.0, 1.0,
-                 0.5, -0.5, 0.0,       1.0, 0.0,    0.0, 0.0, 1.0]
-
-triangleModel = Model(triangleData)
-triangleModel.loadTexture("textures/diamond_block.png")
-triangleModel.position.z = -10
-triangleModel.scale = glm.vec3(5,5,5)
-rend.scene.append(triangleModel) """
 
 obj = Obj("models/dittoo.obj", "textures/ditto.png")
 
@@ -61,16 +47,27 @@ while isRunning:
                 rend.toggleFilledMode()
             elif event.key == pygame.K_0:
                 rend.setShaders(vertex_shader, unlit_shader)
-            elif event.key == pygame.K_9:
-                rend.setShaders(vertex_shader, gourad_shader)
+            elif event.key == pygame.K_1:
+                rend.setShaders(fat_vertex_shader, trip_shader)
+            elif event.key == pygame.K_2:
+                rend.setShaders(vertex_shader, rainbow_shader)
+            elif event.key == pygame.K_3:
+                rend.setShaders(vertex_shader,color_wave_shader)
+            elif event.key == pygame.K_4:
+                rend.setShaders(vertex_shader, cel_shading)
+            elif event.key == pygame.K_5:
+                rend.setShaders(vertex_shader, shader_rayX)
+            elif event.key == pygame.K_6:
+                rend.setShaders(vertices, unlit_shader)
             elif event.key == pygame.K_8:
                 rend.setShaders(vertex_shader, toon_shader)
-            elif event.key == pygame.K_1:
-                rend.setShaders(vertex_shader, shader1)
-                glDisable(GL_CULL_FACE)
-                glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
-            
+            elif event.key == pygame.K_9:
+                rend.setShaders(vertex_shader, gourad_shader)
 
+
+
+
+        
     if keys[K_d]:
         rend.camPosition.x += 5 * deltaTime
     elif keys[K_a]:
@@ -92,8 +89,16 @@ while isRunning:
     elif keys[K_DOWN]:
         if rend.fatness > 0.0:
             rend.fatness -= 1 * deltaTime
+    
+    if keys[K_RIGHT]:
+        if rend.fatness < 1.0:
+            rend.fatness += 1.0 * deltaTime
 
-    obj.model.rotation.y += 45 * deltaTime
+    elif keys[K_LEFT]:
+        if rend.fatness > 0.0:
+            rend.fatness -= 1.0 * deltaTime
+
+    obj.model.rotation.y += 45 * deltaTime * 2
     
     rend.elapsedTime +=  deltaTime
     
@@ -102,23 +107,3 @@ while isRunning:
     pygame.display.flip()
 
 pygame.quit()
-""" if keys[K_RIGHT]:
-            if rend.clearColor[0] < 1.0:
-                rend.clearColor[0] += deltaTime
-        elif keys[K_LEFT]:
-            if rend.clearColor[0] > 0.0:
-                rend.clearColor[0] -= deltaTime
-
-        if keys[K_UP]:
-            if rend.clearColor[1] < 1.0:
-                rend.clearColor[1] += deltaTime
-        elif keys[K_LEFT]:
-            if rend.clearColor[1] > 0.0:
-                rend.clearColor[1] -= deltaTime
-
-        if keys[K_z]:
-            if rend.clearColor[2] < 1.0:
-                rend.clearColor[2] += deltaTime
-        elif keys[K_x]:
-            if rend.clearColor[2] > 0.0:
-                rend.clearColor[2] -= deltaTime  """

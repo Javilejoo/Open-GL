@@ -100,6 +100,7 @@ class Renderer(object):
             glUniform1f(glGetUniformLocation(self.activeShader, "fatness"), self.fatness)
 
             glUniform3fv( glGetUniformLocation(self.activeShader, "dirLight"),1, glm.value_ptr(self.dirLight))
+            
         for obj in self.scene:
             if self.activeShader is not None:
                 glUniformMatrix4fv( glGetUniformLocation(self.activeShader, "modelMatrix"),
